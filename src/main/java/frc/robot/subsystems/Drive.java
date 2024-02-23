@@ -29,6 +29,11 @@ public class Drive extends SubsystemBase {
     rightfront = new CANSparkMax(Constants.RF, CANSparkLowLevel.MotorType.kBrushless);
     rightback = new CANSparkMax(Constants.RB, CANSparkLowLevel.MotorType.kBrushless);
 
+    leftfront.setSmartCurrentLimit(40);
+    leftback.setSmartCurrentLimit(40);
+    rightfront.setSmartCurrentLimit(40);
+    rightback.setSmartCurrentLimit(40);
+
     leftback.follow(leftfront);
     rightback.follow(rightfront);
 

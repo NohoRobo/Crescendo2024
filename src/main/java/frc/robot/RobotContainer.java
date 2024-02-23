@@ -5,8 +5,15 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ManualDrive;
+import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.RunIndexer;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Arm;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -19,9 +26,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Drive drive;
+  public static Intake intake;
+  public static Indexer indexer;
+  public static Arm arm;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
+
+  public static DigitalInput limitSwitch = new DigitalInput(Constants.LimitSwitch);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -50,8 +63,9 @@ public class RobotContainer {
     // m_driverController.a().onTrue(new ExampleCommand(OneMotor, 3.0, -0.001));
     // m_driverController.x().onTrue(new ExampleCommand(OneMotor, 3.0, 0.0));
     // m_driverController.y().onTrue(new Hold(OneMotor));
-
-    
+    m_manipulatorController.leftTrigger().onTrue(new IntakeCommand(intake, arm, indexer));
+    m_manipulatorController.rightTrigger().onTrue(new OuttakeCommand(intake, arm, indexer));
+    m_manipulatorController.rightBumper().onTrue(new RunIndexer(1));
   }
 
   /**
