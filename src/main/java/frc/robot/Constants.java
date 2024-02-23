@@ -15,12 +15,35 @@ package frc.robot;
  */
 public final class Constants {
 
-  public static final int LF = 8;
-  public static final int LB = 7;
-  public static final int RF = 5;
-  public static final int RB = 14;
+  //Drive CAN IDs
+  public static final int LF = 7;
+  public static final int LB = 10;
+  public static final int RF = 12;
+  public static final int RB = 13;
 
-  public static final double SpeedScale = 0.85;
+  //Arm CAN IDs
+  public static final int ArmMotor = 0;
+  public static final int IntakeTop = 0;
+  public static final int IntakeBottom = 0;
+
+  //Indexer CAN ID
+  public static final int IndexerMotor = 0;
+
+  //Climb CAN IDs
+  public static final int LC = 0;
+  public static final int RC = 0;
+
+  //Arm
+  public static final double ArmMaxExtent = 0;
+  public static final double ArmMidExtent = 0;  
+  public static final double ArmMinExtent = 0;
+  public static final double ArmSpeedScale = 0;
+  public static final double ArmSpeed = 0.0;
+
+  public static final double SpeedScale = 0.7;
+
+  public static final double IntakeSpeed = 0.65;
+  public static final double IndexSpeed = 0.65;
 
   public static final String LimelightName = "KakyloptekUponTheKaidu";
   //PV url http://kakyloptekuponthekaidu.local:5800/
@@ -32,42 +55,17 @@ public final class Constants {
   public static final double AimPidI = 0.0;
   public static final double AimPidD = 0.0;
 
-  public static final double LevelPidP = 1.0;
-  public static final double LevelPidI = 0.0;
-  public static final double LevelPidD = 0.0;
-  public static final double LevelSpeedScale = 0.25;
-  public static final double LevelMaxSpeed = 0.25;
-
-  public static final int PigeonBusID = 0;
+  //Sensor Ports
+  public static final int LimitSwitch = 0;
 
 
-  public static final int Shoulder1Motor = 0;
-  public static final int Shoulder2Motor = 0;
-  public static final double ShoulderMaxExtent = 0;
-  public static final double ShoulderSpeedScale = 0;
 
-  public static final int Arm1Motor = 0;
-  public static final int Arm2Motor = 0;
-  public static final double ArmMaxExtent = 0;
-  public static final double ArmSpeedScale = 0;
-
-
-  public static final int WristMotor = 0;
-  public static final double WristCloseSpeed = 0;
-  public static final double WristMaxExtent = 0;
-  public static final double WristDeadzone = 0;
-  public static final double WristSpeedScale = 0;
-
-  public static final int ClawMotor = 0;
-  public static final double ClawCloseSpeed = 0;
-  public static final double ClawMaxExtent = 0;
-  public static final double ClawDeadzone = 0;
-  public static final double ClawSpeedScale = 0;
 
 
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kArmControllerPort = 1;
+    public static final int kManipulatorControllerPort = 1;
   }
 }
+  
