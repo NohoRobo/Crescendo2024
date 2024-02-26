@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Robot;
 
 
 /**
@@ -16,15 +17,20 @@ import frc.robot.Constants.OperatorConstants;
 public class RunArm extends Command {
     // The subsystem the command runs on
 
+    private final double tolerance = 1.0f;
+
     private CommandXboxController m_manipulatorController;
     private double speed;
-    private Double target;
+    private int mode;
+    private double target;
+    
 
-    public RunArm(Double speed, Double target) {
+    public RunArm(Double speed, Double target, Integer mode) {
         m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
         this.speed = speed;
         this.target = target;
-        // addRequirements(RobotContainer.arm);
+        this.mode = mode;
+        addRequirements(RobotContainer.arm);
     }
 
 
@@ -36,17 +42,34 @@ public class RunArm extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("arm go brr");
+        if (mode == 1) {
+            RobotContainer.arm.moveArm(speed * mode);
+        }
+        else {
+            RobotContainer.arm.moveArm(-0.02);
+        }
+
+
+        // if (RobotContainer.arm.getRotations() < target) {
+        //     RobotContainer.arm.moveArm(Constants.ArmSpeed);
+        // }
+        // if (RobotContainer.arm.getRotations() > target) {
+        //     RobotContainer.arm.moveArm((-1) * Constants.ArmSpeed);
+        // }
+
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-
+        RobotContainer.arm.moveArm(0.08);
+    
     }
 
     @Override
     public boolean isFinished() {
-        return true;
+        // double distanceDifference = RobotContainer.arm.getRotations() - target;
+        // return Math.abs(distanceDifference) < tolerance;
+        return false;       
     }
 }

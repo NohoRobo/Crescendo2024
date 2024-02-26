@@ -6,6 +6,7 @@ import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Arm extends SubsystemBase {
 
@@ -15,22 +16,20 @@ public class Arm extends SubsystemBase {
 
     public Arm() {
         arm = new CANSparkMax(Constants.ArmMotor, CANSparkLowLevel.MotorType.kBrushless);
+
+        arm.setSmartCurrentLimit(40);
         arm.restoreFactoryDefaults();
+        
         encoder = arm.getEncoder();
     }
 
-    public void moveArm(Double speed, Double armPosition) {
-        double pos = encoder.getPosition();
-        if (speed >= 0 && pos < armPosition) {
-            arm.set(speed);
-        } else if (speed < 0 && pos > 0) {
-            arm.set(speed);
-        } else {
-            arm.set(0);
-        }
+    public void moveArm(Double speed) {
+        arm.set(speed);
     }
 
-
+    public double getRotations() {
+        return encoder.getPosition();
+    }
 
     @Override
     public void periodic() {

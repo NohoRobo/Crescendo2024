@@ -14,7 +14,7 @@ public class RunIntake extends Command {
     public RunIntake(Integer mode) {
         m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
         this.mode = mode;
-        // addRequirements(RobotContainer.intake);
+        addRequirements(RobotContainer.intake);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RunIntake extends Command {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
 }

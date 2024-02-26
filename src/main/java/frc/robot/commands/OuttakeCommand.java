@@ -9,8 +9,8 @@ import frc.robot.subsystems.Intake;
 public class OuttakeCommand extends ParallelCommandGroup {
     public OuttakeCommand(Intake intake, Arm arm, Indexer indexer) {
         addCommands(
-            new RunIntake(1),         
-            new RunArm((1) * Constants.ArmSpeed, Constants.ArmMaxExtent)
+            new RunIntake(1)         
+            // new RunArm(Constants.ArmSpeed, Constants.ArmMaxExtent, 1)
         );
     }
 }

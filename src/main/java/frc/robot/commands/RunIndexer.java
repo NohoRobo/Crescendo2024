@@ -14,7 +14,7 @@ public class RunIndexer extends Command {
   public RunIndexer(Integer mode) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.mode = mode;
-    // addRequirements(RobotContainer.indexer);
+    addRequirements(RobotContainer.indexer);
   }
 
   // Called when the command is initially scheduled.
@@ -37,6 +37,6 @@ public class RunIndexer extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

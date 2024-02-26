@@ -15,6 +15,7 @@ public class Indexer extends SubsystemBase {
   public Indexer() {
     indexerMotor = new CANSparkMax(Constants.IndexerMotor, CANSparkLowLevel.MotorType.kBrushless);
     indexerMotor.setSmartCurrentLimit(20);
+    indexerMotor.restoreFactoryDefaults();
   }
 
   public void index(Double speed, Integer mode) {

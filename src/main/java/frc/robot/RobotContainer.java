@@ -8,12 +8,16 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ManualDrive;
 import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.RunArm;
 import frc.robot.commands.RunIndexer;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -34,12 +38,16 @@ public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
 
-  public static DigitalInput limitSwitch = new DigitalInput(Constants.LimitSwitch);
+  public static DigitalInput limitSwitch1 = new DigitalInput(Constants.LimitSwitch1);
+  public static DigitalInput limitSwitch2 = new DigitalInput(Constants.LimitSwitch2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     drive = new Drive();
+    intake = new Intake();
+    indexer = new Indexer();
+    arm = new Arm();
     drive.setDefaultCommand(new ManualDrive());
     configureBindings();
   }
@@ -63,9 +71,16 @@ public class RobotContainer {
     // m_driverController.a().onTrue(new ExampleCommand(OneMotor, 3.0, -0.001));
     // m_driverController.x().onTrue(new ExampleCommand(OneMotor, 3.0, 0.0));
     // m_driverController.y().onTrue(new Hold(OneMotor));
-    m_manipulatorController.leftTrigger().onTrue(new IntakeCommand(intake, arm, indexer));
-    m_manipulatorController.rightTrigger().onTrue(new OuttakeCommand(intake, arm, indexer));
-    m_manipulatorController.rightBumper().onTrue(new RunIndexer(1));
+    m_manipulatorController.leftTrigger().whileTrue(new RunIntake(-1));
+    m_manipulatorController.rightTrigger().whileTrue(new OuttakeCommand(intake, arm, indexer));
+    m_manipulatorController.rightBumper().whileTrue(new RunIndexer(1));
+    m_manipulatorController.a().whileTrue(new RunArm(Constants.ArmSpeed, 0.0, 1));
+    m_manipulatorController.b().whileTrue(new RunArm(Constants.ArmSpeed, 0.0, -1));
+  }
+
+  //TODO - run arm backwards until limitswitch 3 is pressed
+  public void resetArmPosition() {
+    
   }
 
   /**
@@ -73,9 +88,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  //public Command getAutonomousCommand() {
+  // public Command getAutonomousCommand() {
   //  // An example command will be run in autonomous
-  //  return Autos.exampleAuto(m_exampleSubsystem);
-  //}
+  
+  // }
 
 }

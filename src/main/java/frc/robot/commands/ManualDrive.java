@@ -32,10 +32,10 @@ public class ManualDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Double l = m_driverController.getLeftY();
-    Double r = m_driverController.getRightY();
+    // Double l = m_driverController.getLeftY();
+    // Double r = m_driverController.getRightY();
 
-    RobotContainer.drive.drive(l * Constants.SpeedScale, r * Constants.SpeedScale);
+    // RobotContainer.drive.drive(l * Constants.SpeedScale, r * Constants.SpeedScale);
   }
 
   // Called once the command ends or is interrupted.

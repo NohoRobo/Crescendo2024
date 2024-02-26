@@ -22,9 +22,9 @@ public final class Constants {
   public static final int RB = 13;
 
   //Arm CAN IDs
-  public static final int ArmMotor = 0;
-  public static final int IntakeTop = 0;
-  public static final int IntakeBottom = 0;
+  public static final int ArmMotor = 1;
+  public static final int IntakeTop = 5;
+  public static final int IntakeBottom = 3;
 
   //Indexer CAN ID
   public static final int IndexerMotor = 0;
@@ -37,12 +37,12 @@ public final class Constants {
   public static final double ArmMaxExtent = 0;
   public static final double ArmMidExtent = 0;  
   public static final double ArmMinExtent = 0;
-  public static final double ArmSpeedScale = 0;
-  public static final double ArmSpeed = 0.0;
+
+  public static final double ArmSpeed = 0.15;
 
   public static final double SpeedScale = 0.7;
 
-  public static final double IntakeSpeed = 0.65;
+  public static final double IntakeSpeed = 0.1;
   public static final double IndexSpeed = 0.65;
 
   public static final String LimelightName = "KakyloptekUponTheKaidu";
@@ -56,7 +56,8 @@ public final class Constants {
   public static final double AimPidD = 0.0;
 
   //Sensor Ports
-  public static final int LimitSwitch = 0;
+  public static final int LimitSwitch1 = 0;
+  public static final int LimitSwitch2 = 1;
 
 
 
@@ -65,7 +66,7 @@ public final class Constants {
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kManipulatorControllerPort = 1;
+    public static final int kManipulatorControllerPort = 0;
   }
 }
   
