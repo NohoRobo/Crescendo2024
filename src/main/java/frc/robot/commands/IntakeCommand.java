@@ -22,6 +22,6 @@ public class IntakeCommand extends SequentialCommandGroup {
             )
         );
 
-        addCommands(new RunIndexer(-1).until(RobotContainer.limitSwitch2::get));
+        // addCommands(new RunIndexer(-1).until(RobotContainer.limitSwitch2::get));
     }
 }

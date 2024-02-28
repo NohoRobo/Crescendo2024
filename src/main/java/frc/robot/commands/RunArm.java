@@ -46,7 +46,7 @@ public class RunArm extends Command {
             RobotContainer.arm.moveArm(speed * mode);
         }
         else {
-            RobotContainer.arm.moveArm(-0.02);
+            RobotContainer.arm.moveArm(speed * mode);
         }
 
 
@@ -62,7 +62,7 @@ public class RunArm extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        RobotContainer.arm.moveArm(0.08);
+        RobotContainer.arm.moveArm(0.01);
     
     }
 

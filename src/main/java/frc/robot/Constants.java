@@ -42,7 +42,7 @@ public final class Constants {
 
   public static final double SpeedScale = 0.7;
 
-  public static final double IntakeSpeed = 0.1;
+  public static final double IntakeSpeed = 0.65;
   public static final double IndexSpeed = 0.65;
 
   public static final String LimelightName = "KakyloptekUponTheKaidu";

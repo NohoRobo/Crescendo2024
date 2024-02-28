@@ -24,7 +24,13 @@ public class RunIntake extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        RobotContainer.intake.intake(Constants.IntakeSpeed, mode);
+        if (mode == -1) {
+            RobotContainer.intake.intake(Constants.IntakeSpeed/2, mode);
+        }
+        else {
+            RobotContainer.intake.intake(Constants.IntakeSpeed, mode);            
+        }
+
     }
 
     // Called once the command ends or is interrupted.
