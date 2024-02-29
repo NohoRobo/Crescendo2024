@@ -13,13 +13,13 @@ public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
   CANSparkMax indexerMotor;
   public Indexer() {
-    // indexerMotor = new CANSparkMax(Constants.IndexerMotor, CANSparkLowLevel.MotorType.kBrushless);
-    // indexerMotor.setSmartCurrentLimit(20);
-    // indexerMotor.restoreFactoryDefaults();
+    indexerMotor = new CANSparkMax(Constants.IndexerMotor, CANSparkLowLevel.MotorType.kBrushless);
+    indexerMotor.setSmartCurrentLimit(20);
+    indexerMotor.restoreFactoryDefaults();
   }
 
   public void index(Double speed, Integer mode) {
-    // indexerMotor.set(mode * speed);
+    indexerMotor.set((-1) * mode * speed);
   }
 
   @Override

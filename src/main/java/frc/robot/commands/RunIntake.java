@@ -25,10 +25,10 @@ public class RunIntake extends Command {
     @Override
     public void execute() {
         if (mode == -1) {
-            RobotContainer.intake.intake(Constants.IntakeSpeed/2, mode);
+            RobotContainer.intake.intake(Constants.IntakeSpeed, mode);
         }
         else {
-            RobotContainer.intake.intake(Constants.IntakeSpeed, mode);            
+            RobotContainer.intake.intake(Constants.IntakeSpeed*2, mode);            
         }
 
     }

@@ -16,19 +16,19 @@ public class Climb extends SubsystemBase {
   CANSparkMax rightClimb;
 
   public Climb() {
-    // leftClimb = new CANSparkMax(Constants.LC, CANSparkLowLevel.MotorType.kBrushless);
-    // rightClimb = new CANSparkMax(Constants.RC, CANSparkLowLevel.MotorType.kBrushless);
+    leftClimb = new CANSparkMax(Constants.LC, CANSparkLowLevel.MotorType.kBrushless);
+    rightClimb = new CANSparkMax(Constants.RC, CANSparkLowLevel.MotorType.kBrushless);
 
-    // leftClimb.setSmartCurrentLimit(40);
-    // rightClimb.setSmartCurrentLimit(40);
+    leftClimb.setSmartCurrentLimit(40);
+    rightClimb.setSmartCurrentLimit(40);
 
-    // leftClimb.restoreFactoryDefaults();
-    // rightClimb.restoreFactoryDefaults();
+    leftClimb.restoreFactoryDefaults();
+    rightClimb.restoreFactoryDefaults();
   }
 
   public void extend(Double speed) {
-    // leftClimb.set(speed);
-    // rightClimb.set(speed);
+    leftClimb.set(speed);
+    rightClimb.set(speed);
   }
 
 

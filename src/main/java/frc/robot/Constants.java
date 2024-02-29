@@ -27,11 +27,11 @@ public final class Constants {
   public static final int IntakeBottom = 3;
 
   //Indexer CAN ID
-  public static final int IndexerMotor = 0;
+  public static final int IndexerMotor = 9;
 
   //Climb CAN IDs
-  public static final int LC = 0;
-  public static final int RC = 0;
+  public static final int LC = 14;
+  public static final int RC = 2;
 
   //Arm
   public static final double ArmMaxExtent = 0;
@@ -42,8 +42,9 @@ public final class Constants {
 
   public static final double SpeedScale = 0.7;
 
-  public static final double IntakeSpeed = 0.65;
-  public static final double IndexSpeed = 0.65;
+  public static final double IntakeSpeed = 0.3;
+  public static final double IndexSpeed = 0.2;
+  public static final double ClimbSpeed = 0.3;
 
   public static final String LimelightName = "KakyloptekUponTheKaidu";
   //PV url http://kakyloptekuponthekaidu.local:5800/
@@ -58,6 +59,8 @@ public final class Constants {
   //Sensor Ports
   public static final int LimitSwitch1 = 0;
   public static final int LimitSwitch2 = 1;
+  public static final int LimitSwitch3 = 2;
+  public static final int ThroughboreEncoder = 3;
 
 
 

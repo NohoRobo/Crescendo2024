@@ -26,6 +26,7 @@ public class RunIndexer extends Command {
   @Override
   public void execute() {
     RobotContainer.indexer.index(Constants.IndexSpeed, mode);
+    System.out.println("index");
   }
 
   // Called once the command ends or is interrupted.

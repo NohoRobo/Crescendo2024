@@ -28,7 +28,7 @@ public class Arm extends SubsystemBase {
     }
 
     public double getRotations() {
-        return encoder.getPosition();
+        return RobotContainer.dcEncoder.getAbsolutePosition();
     }
 
     @Override

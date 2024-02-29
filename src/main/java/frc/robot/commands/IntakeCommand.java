@@ -17,7 +17,7 @@ public class IntakeCommand extends SequentialCommandGroup {
     public IntakeCommand(Intake intake, Arm arm, Indexer indexer) {
         addCommands(
             new ParallelDeadlineGroup(           
-                new RunIntake(-1).until(RobotContainer.limitSwitch1::get)
+                new RunIntake(-1)
                 // new RunArm(Constants.ArmSpeed, Constants.ArmMaxExtent, -1)      
             )
         );
