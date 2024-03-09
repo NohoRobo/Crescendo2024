@@ -4,14 +4,15 @@ import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class Arm extends SubsystemBase {
-
+    
     CANSparkMax arm;
-    RelativeEncoder encoder;
+    public RelativeEncoder encoder;
   /** Creates a new ExampleSubsystem. */
 
     public Arm() {
@@ -21,6 +22,8 @@ public class Arm extends SubsystemBase {
         arm.restoreFactoryDefaults();
         
         encoder = arm.getEncoder();
+
+        
     }
 
     public void moveArm(Double speed) {
@@ -28,8 +31,21 @@ public class Arm extends SubsystemBase {
     }
 
     public double getRotations() {
-        return RobotContainer.dcEncoder.getAbsolutePosition();
+        double pos = encoder.getPosition();
+        if (Math.abs(pos - Constants.ArmZeroTolerance) < 2) {
+            pos = 0;
+        }
+        if (pos != 0) {
+            return -pos;
+        } else {
+            return 0;
+        }
     }
+
+    public void resetEncoder() {
+        encoder.setPosition(0);
+    }
+
 
     @Override
     public void periodic() {

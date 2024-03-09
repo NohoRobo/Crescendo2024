@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -7,6 +8,7 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Robot;
+
 
 
 /**
@@ -17,12 +19,13 @@ import frc.robot.Robot;
 public class RunArm extends Command {
     // The subsystem the command runs on
 
-    private final double tolerance = 1.0f;
+    private final double tolerance = 0.05;
 
     private CommandXboxController m_manipulatorController;
     private double speed;
     private int mode;
     private double target;
+    private int stallTorqueSign;
     
 
     public RunArm(Double speed, Double target, Integer mode) {
@@ -42,34 +45,44 @@ public class RunArm extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (mode == 1) {
-            RobotContainer.arm.moveArm(speed * mode);
-        }
-        else {
-            RobotContainer.arm.moveArm(speed * mode);
-        }
+        // if (mode == 1) {
+        //     RobotContainer.arm.moveArm(speed * mode);
+        // }
+        // else {
+        //     RobotContainer.arm.moveArm(speed * mode);
+        // }
 
+        try (PIDController pid = new PIDController(0.02, 0.01, 0.00)) {
+            double output = -pid.calculate(RobotContainer.arm.getRotations(), target);
+            output = Math.signum(output) * Math.min(Math.abs(output), Math.abs(Constants.ArmSpeed));
+            RobotContainer.arm.moveArm(output);
+                    System.out.print("juice: " + output);
 
-        // if (RobotContainer.arm.getRotations() < target) {
+        }
+        // if (RobotContainer.arm.getRotations() > target) {
         //     RobotContainer.arm.moveArm(Constants.ArmSpeed);
         // }
-        // if (RobotContainer.arm.getRotations() > target) {
+        // else if (RobotContainer.arm.getRotations() < target) {
         //     RobotContainer.arm.moveArm((-1) * Constants.ArmSpeed);
         // }
+        System.out.print(" target: " + target);
+        System.out.println(" position: " + RobotContainer.arm.getRotations());
 
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        RobotContainer.arm.moveArm(0.01);
-    
+
+        RobotContainer.arm.moveArm( 0.0);
     }
 
     @Override
     public boolean isFinished() {
         // double distanceDifference = RobotContainer.arm.getRotations() - target;
-        // return Math.abs(distanceDifference) < tolerance;
-        return false;       
+        // System.out.println(distanceDifference + "**");
+        // System.out.println(Math.abs(distanceDifference) < tolerance);
+        // return Math.abs(distanceDifference) < tolerance;  
+        return false;
     }
 }

@@ -55,6 +55,7 @@ public class RobotContainer {
     arm = new Arm();
     climb = new Climb();
     drive.setDefaultCommand(new ManualDrive());
+    arm.resetEncoder();
     configureBindings();
   }
 
@@ -77,14 +78,17 @@ public class RobotContainer {
     // m_driverController.a().onTrue(new ExampleCommand(OneMotor, 3.0, -0.001));
     // m_driverController.x().onTrue(new ExampleCommand(OneMotor, 3.0, 0.0));
     // m_driverController.y().onTrue(new Hold(OneMotor));
-    m_manipulatorController.leftTrigger().whileTrue(new IntakeCommand(intake, arm, indexer));
-    m_manipulatorController.rightTrigger().whileTrue(new OuttakeCommand(intake, arm, indexer));
-    m_manipulatorController.rightBumper().whileTrue(new RunIndexer(1));
+    // m_manipulatorController.leftTrigger().whileTrue(new IntakeCommand(intake, arm, indexer));
+    // m_manipulatorController.rightTrigger().whileTrue(new OuttakeCommand(intake, arm, indexer));
+    m_manipulatorController.leftTrigger().whileTrue(new RunIntake(-1, Constants.IntakeSpeed));
+    m_manipulatorController.rightTrigger().whileTrue(new RunIntake(1, Constants.IntakeSpeed*2));
     m_manipulatorController.leftBumper().whileTrue(new RunIndexer(-1));
-    m_manipulatorController.a().whileTrue(new RunArm(Constants.ArmSpeed, 0.0, 1));
-    m_manipulatorController.b().whileTrue(new RunArm(Constants.ArmSpeed, 0.0, -1));
-    m_manipulatorController.x().whileTrue(new RunClimb(1));
-    m_manipulatorController.y().whileTrue(new RunClimb(-1));
+    m_manipulatorController.rightBumper().whileTrue(new RunIndexer(1));
+    m_manipulatorController.a().whileTrue(new RunArm(Constants.ArmSpeed, Constants.ArmMidExtent, 1));
+    m_manipulatorController.b().whileTrue(new RunArm(Constants.ArmSpeed, Constants.ArmMidExtent, -1));
+    m_driverController.x().whileTrue(new RunClimb(1));
+    m_driverController.y().whileTrue(new RunClimb(-1));
+    m_manipulatorController.povDown().whileTrue(new RunIntake(1, Constants.AmpOuttakeSpeed));
   }
 
   //TODO - run arm backwards until limitswitch 3 is pressed

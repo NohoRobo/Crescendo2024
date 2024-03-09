@@ -10,10 +10,12 @@ public class RunIntake extends Command {
 
     private final CommandXboxController m_manipulatorController;
     private int mode;
+    private double speed;
 
-    public RunIntake(Integer mode) {
+    public RunIntake(Integer mode, Double speed) {
         m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
         this.mode = mode;
+        this.speed = speed;
         addRequirements(RobotContainer.intake);
     }
 
@@ -25,10 +27,10 @@ public class RunIntake extends Command {
     @Override
     public void execute() {
         if (mode == -1) {
-            RobotContainer.intake.intake(Constants.IntakeSpeed, mode);
+            RobotContainer.intake.intake(speed, mode);
         }
         else {
-            RobotContainer.intake.intake(Constants.IntakeSpeed*2, mode);            
+            RobotContainer.intake.intake(speed, mode);            
         }
 
     }

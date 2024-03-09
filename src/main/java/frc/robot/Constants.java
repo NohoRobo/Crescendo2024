@@ -17,7 +17,7 @@ public final class Constants {
 
   //Drive CAN IDs
   public static final int LF = 7;
-  public static final int LB = 10;
+  public static final int LB = 16;
   public static final int RF = 12;
   public static final int RB = 13;
 
@@ -34,15 +34,19 @@ public final class Constants {
   public static final int RC = 2;
 
   //Arm
-  public static final double ArmMaxExtent = 0;
-  public static final double ArmMidExtent = 0;  
-  public static final double ArmMinExtent = 0;
 
-  public static final double ArmSpeed = 0.15;
+  public static final double ArmMidExtent = 30;  
 
-  public static final double SpeedScale = 0.7;
+  public static final double ArmSpeed = 0.3;  
+  
+  public static final double ArmZeroTolerance = 0.3;
 
-  public static final double IntakeSpeed = 0.3;
+
+  public static final double SpeedScale = 0.85;
+
+  public static final double IntakeSpeed = 0.45;
+  public static final double OuttakeSpeed = 0.7;
+  public static final double AmpOuttakeSpeed = 0.5;
   public static final double IndexSpeed = 0.2;
   public static final double ClimbSpeed = 0.3;
 
@@ -68,7 +72,7 @@ public final class Constants {
 
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 1;
     public static final int kManipulatorControllerPort = 0;
   }
 }

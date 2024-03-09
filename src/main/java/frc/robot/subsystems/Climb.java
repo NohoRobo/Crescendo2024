@@ -26,6 +26,8 @@ public class Climb extends SubsystemBase {
     rightClimb.restoreFactoryDefaults();
   }
 
+  
+
   public void extend(Double speed) {
     leftClimb.set(speed);
     rightClimb.set(speed);
