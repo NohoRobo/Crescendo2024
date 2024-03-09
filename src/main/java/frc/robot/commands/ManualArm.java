@@ -6,41 +6,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.RobotContainer;
 
-public class ManualDrive extends Command {
+public class ManualArm extends Command {
+  private CommandXboxController m_manipulatorController;
+  private Double speed;
+  private Double target;
+  private Integer mode;
 
-  private final CommandXboxController m_driverController;
-  //private final Drive m_drive;
-
-  /** Creates a new ManualDrive. */
-  public ManualDrive() {
-    m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
-    //m_drive = drive;
-
+  /** Creates a new ManualArm. */
+  public ManualArm(Double speed, Double target, Integer mode) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.drive);
+            m_manipulatorController = new CommandXboxController(OperatorConstants.kManipulatorControllerPort);
+        this.speed = speed;
+        this.target = target;
+        this.mode = mode;
+        addRequirements(RobotContainer.arm);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Double l = m_driverController.getLeftY();
-    Double r = m_driverController.getRightY();
+    RobotContainer.arm.moveArm(speed * mode);
 
-    RobotContainer.drive.drive(l * l * Constants.SpeedScale, r * r *  Constants.SpeedScale);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.arm.moveArm(0.0);
   }
 
   // Returns true when the command should end.

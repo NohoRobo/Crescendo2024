@@ -35,18 +35,19 @@ public final class Constants {
 
   //Arm
 
-  public static final double ArmMidExtent = 30;  
+  public static final double ArmMidExtent = 27.5;
+  public static final double ArmMaxExtent = 36;  
 
-  public static final double ArmSpeed = 0.3;  
+  public static final double ArmSpeed = 0.2;  
   
-  public static final double ArmZeroTolerance = 0.3;
+  public static final double ArmZeroTolerance = 0.2;
 
 
   public static final double SpeedScale = 0.85;
 
-  public static final double IntakeSpeed = 0.45;
+  public static final double IntakeSpeed = 0.55;
   public static final double OuttakeSpeed = 0.7;
-  public static final double AmpOuttakeSpeed = 0.5;
+  public static final double AmpOuttakeSpeed = 0.4;
   public static final double IndexSpeed = 0.2;
   public static final double ClimbSpeed = 0.3;
 

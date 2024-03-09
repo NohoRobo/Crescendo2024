@@ -45,13 +45,42 @@ public class RunArm extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // if (mode == 1) {
-        //     RobotContainer.arm.moveArm(speed * mode);
-        // }
-        // else {
-        //     RobotContainer.arm.moveArm(speed * mode);
+
+        
+        //code for manual arm control
+
+        /*  
+        // code to print what the variable "output" is
+        try {
+            PIDController pid = new PIDController(0.02, 0.01, 0.00);
+            double output = -pid.calculate(RobotContainer.arm.getRotations(), target);
+            System.out.println(output);
+        } catch (Exception e) {
+
+        }*/
+
+        
+        
+        // // might work ?
+        // try {
+        //     PIDController pid = new PIDController(0.0, 0.0, 0.0);
+        //     // if the arm is trying to move in the wrong direction, remove the minus sign in the line below 
+        //     double position = RobotContainer.arm.getRotations();
+        //     double output = pid.calculate(position, target);
+        //     System.out.print(" original output");
+        //     output = Math.signum(output) * Math.min(Math.abs(output), Math.abs(Constants.ArmSpeed));
+
+        //     System.out.print(" target: " + target);
+        //     System.out.print(" position: " + position);
+        //     System.out.println(" output: " + output);
+
+        //     RobotContainer.arm.moveArm(output);
+
+        // } catch (Exception e) {
+        //     e.printStackTrace();
         // }
 
+         
         try (PIDController pid = new PIDController(0.02, 0.01, 0.00)) {
             double output = -pid.calculate(RobotContainer.arm.getRotations(), target);
             output = Math.signum(output) * Math.min(Math.abs(output), Math.abs(Constants.ArmSpeed));
@@ -59,14 +88,9 @@ public class RunArm extends Command {
                     System.out.print("juice: " + output);
 
         }
-        // if (RobotContainer.arm.getRotations() > target) {
-        //     RobotContainer.arm.moveArm(Constants.ArmSpeed);
-        // }
-        // else if (RobotContainer.arm.getRotations() < target) {
-        //     RobotContainer.arm.moveArm((-1) * Constants.ArmSpeed);
-        // }
-        System.out.print(" target: " + target);
-        System.out.println(" position: " + RobotContainer.arm.getRotations());
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -74,15 +98,11 @@ public class RunArm extends Command {
     @Override
     public void end(boolean interrupted) {
 
-        RobotContainer.arm.moveArm( 0.0);
+        RobotContainer.arm.moveArm(0.0);
     }
 
     @Override
     public boolean isFinished() {
-        // double distanceDifference = RobotContainer.arm.getRotations() - target;
-        // System.out.println(distanceDifference + "**");
-        // System.out.println(Math.abs(distanceDifference) < tolerance);
-        // return Math.abs(distanceDifference) < tolerance;  
         return false;
     }
 }

@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ManualArm;
 import frc.robot.commands.ManualDrive;
 import frc.robot.commands.OuttakeCommand;
 import frc.robot.commands.RunArm;
@@ -19,6 +20,7 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Climb;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -45,6 +47,8 @@ public class RobotContainer {
   public static DigitalInput limitSwitch1 = new DigitalInput(Constants.LimitSwitch1);
   public static DigitalInput limitSwitch2 = new DigitalInput(Constants.LimitSwitch2);
   public static DutyCycleEncoder dcEncoder = new DutyCycleEncoder(new DigitalInput(Constants.ThroughboreEncoder));
+  public static Servo servoLeft = new Servo(0);
+  public static Servo servoRight = new Servo(1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -85,10 +89,13 @@ public class RobotContainer {
     m_manipulatorController.leftBumper().whileTrue(new RunIndexer(-1));
     m_manipulatorController.rightBumper().whileTrue(new RunIndexer(1));
     m_manipulatorController.a().whileTrue(new RunArm(Constants.ArmSpeed, Constants.ArmMidExtent, 1));
-    m_manipulatorController.b().whileTrue(new RunArm(Constants.ArmSpeed, Constants.ArmMidExtent, -1));
+    m_manipulatorController.b().whileTrue(new RunArm(Constants.ArmSpeed, Constants.ArmMaxExtent, 1));
     m_driverController.x().whileTrue(new RunClimb(1));
     m_driverController.y().whileTrue(new RunClimb(-1));
     m_manipulatorController.povDown().whileTrue(new RunIntake(1, Constants.AmpOuttakeSpeed));
+    m_manipulatorController.povLeft().whileTrue(new ManualArm(Constants.ArmSpeed, 0.0, 1));
+    m_manipulatorController.povRight().whileTrue(new ManualArm(Constants.ArmSpeed, 1.0, -1));
+
   }
 
   //TODO - run arm backwards until limitswitch 3 is pressed
